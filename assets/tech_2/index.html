@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .card {
+        display: inline-block;
+        margin-right: 30px;
+        width: 50px;
+        height: 50px;
+        background: #000;
+        color: white;
+        user-select: none;
+      }
+      .card1 {
+        display: inline-block;
+        width: 150px;
+        background: #000;
+        color: white;
+        user-select: none;
+        height: 150px;
+      }
+      .desc.active {
+        color: red;
+      }
+      .desc {
+        user-select: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello Vue</h1>
+    <section id="vue">
+      <div class="card-container">
+        <span class="card" @mouseover="onLogEven">Mouse Over</span>
+        <span class="card" @mouseleave="onLogEven">Mouse Leave</span>
+        <span class="card" @dblClick="onLogEven($event,150,100)"
+          >Double Click</span
+        >
+        <span class="card1" @mousemove="onMouseMove"
+          >Mouse move {{`${x}-${y}`}}</span
+        >
+      </div>
+      <div v-for="item in arr">
+        <img :src="image +' '+ 123" alt="" /><!-- : kí hiệu image là biến -->
+        <span
+          class="desc"
+          :class="{active: item.isCart}"
+          @click="onToggle($event,item)"
+          >{{`${item.name} - ${item.price}`}}
+          <!-- Dinatic classes :  :class="{active: item.isCart}"   -->
+        </span>
+      </div>
+      <div>{{newArr}}</div>
+    </section>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
