@@ -1,3 +1,30 @@
+<template>
+  <div class="appVUE">
+    <AppHeader ref="header"></AppHeader>
+    <button @click="ChangeCount">{{ count }}</button>
+    <span class="text">App CSS</span>
+    <teleport to="body">
+      <modal-vue
+        @cancel="onToggleModal"
+        v-if="isShowModel"
+        title="Props title"
+        content="content"
+        theme="2"
+      >
+        <!--v-slot:footer  -> gọi outlet theo name  -->
+        <template v-slot:footer>
+          <h2>Slot Footer</h2>
+        </template>
+        <template v-slot:header>
+          <h2>Slot Header</h2>
+        </template>
+        <span>slot default</span>
+      </modal-vue>
+    </teleport>
+    <!-- @cancel : lắng nghe sự kiện cancel của components con -->
+    <button @click="onToggleModal">ToggleModal</button>
+  </div>
+</template>
 <script>
 /* C1 */
 // import AppHeader from './components/AppHeader.vue'
@@ -12,32 +39,35 @@
 // }
 /* c2 */
 import AppHeader from './components/AppHeader.vue'
+import ModalVue from './components/ModalVue.vue'
 export default {
   name: 'App',
   components: {
-    AppHeader
+    AppHeader,
+    ModalVue
   },
   data() {
     return {
-      count: 0
+      count: 0,
+      isShowModel: true
     }
   },
   methods: {
     ChangeCount() {
-      console.log(this.$refs.header.greet()) // truy xuất đến ref của component AppHeader lấy methods
+      // console.log(this.$refs.header.greet()) // truy xuất đến ref của component AppHeader lấy methods
       console.log(this.$refs.header.message) // truy xuất đến ref của component AppHeader lấy data
       this.count++ // truy xuất đến biến count
+    },
+    onToggleModal() {
+      console.log('running')
+      this.isShowModel = !this.isShowModel
     }
   }
 }
 </script>
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-    <AppHeader ref="header"></AppHeader>
-    <button @click="ChangeCount">{{ count }}</button>
-  </header>
-</template>
-
-<style scoped></style>
+<style scoped>
+.appVUE {
+  width: 100%;
+}
+</style>
