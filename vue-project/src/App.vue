@@ -1,9 +1,10 @@
 <template>
   <div class="appVUE">
-    <AppHeader ref="header"></AppHeader>
-    <button @click="ChangeCount">{{ count }}</button>
-    <span class="text">App CSS</span>
-    <teleport to="body">
+    <div>
+      <AppHeader ref="header"></AppHeader>
+      <button @click="ChangeCount">{{ count }}</button>
+      <span class="text">App CSS</span>
+      <!-- <teleport to="body"> -->
       <modal-vue
         @cancel="onToggleModal"
         v-if="isShowModel"
@@ -20,11 +21,14 @@
         </template>
         <span>slot default</span>
       </modal-vue>
-    </teleport>
-    <!-- @cancel : lắng nghe sự kiện cancel của components con -->
-    <button @click="onToggleModal">ToggleModal</button>
+      <!-- </teleport> -->
+      <!-- @cancel : lắng nghe sự kiện cancel của components con -->
+      <button @click="onToggleModal">ToggleModal</button>
+    </div>
+    <quiz-form></quiz-form>
   </div>
 </template>
+
 <script>
 /* C1 */
 // import AppHeader from './components/AppHeader.vue'
@@ -40,11 +44,13 @@
 /* c2 */
 import AppHeader from './components/AppHeader.vue'
 import ModalVue from './components/ModalVue.vue'
+import QuizForm from './components/QuizForm.vue'
 export default {
   name: 'App',
   components: {
     AppHeader,
-    ModalVue
+    ModalVue,
+    QuizForm
   },
   data() {
     return {
